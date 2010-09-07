@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.tomale.id.preferences.dataproviders"
+            class="org.tomale.id.documents.management.oracle.preferences.OracleDocumentStorePreferencePage"
+            id="org.tomale.id.documents.management.oracle.preferences.documentstorepage"
+            name="Oracle Document Store">
+      </page>
+   </extension>
+   <extension
+         point="org.tomale.id.documents.management.documentstores.providers">
+      <provider
+            class="org.tomale.id.documents.management.oracle.OracleDocumentStore"
+            id="org.tomale.id.documents.management.oracle.provider"
+            name="Oracle Document Store Provider">
+      </provider>
+   </extension>
+
+</plugin>

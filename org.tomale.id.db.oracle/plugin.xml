@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.tomale.id.db.connection.providers">
+      <factory
+            class="org.tomale.id.db.oracle.ConnectionFactory"
+            id="org.tomale.id.db.oracle.factory"
+            name="Oracle Connection Provider">
+      </factory>
+   </extension>
+
+</plugin>

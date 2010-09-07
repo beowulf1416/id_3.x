@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Oracle
+Bundle-SymbolicName: org.tomale.id.db.oracle;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.tomale.id.db.oracle.Activator
+Bundle-Vendor: tomale.org
+Require-Bundle: org.eclipse.core.runtime,
+ org.tomale.id;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: lib/ojdbc14.jar,
+ lib/ojdbc14_g.jar,
+ .
