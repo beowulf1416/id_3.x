@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Json
+Bundle-SymbolicName: org.tomale.id.json;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: tomale.org
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.json
