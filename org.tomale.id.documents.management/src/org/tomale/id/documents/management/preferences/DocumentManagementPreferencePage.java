@@ -26,6 +26,7 @@ import org.tomale.id.documents.management.DocumentStoreConfigurationElement;
 public class DocumentManagementPreferencePage extends PreferencePage implements
 		IWorkbenchPreferencePage {
 
+	String _selectedStore = "";
 	Combo _stores;
 	
 	/* (non-Javadoc)
@@ -57,6 +58,9 @@ public class DocumentManagementPreferencePage extends PreferencePage implements
 			_stores.add(element.getName());
 			_stores.setData(element.getName(), element);
 		}
+		if(!_selectedStore.isEmpty()){
+			_stores.setText(_selectedStore);
+		}
 	}
 
 	/* (non-Javadoc)
@@ -66,9 +70,7 @@ public class DocumentManagementPreferencePage extends PreferencePage implements
 	public void init(IWorkbench workbench) {
 
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		if(!store.getString(PreferenceConstants.DOC_STORE_PROVIDER).isEmpty()){
-			_stores.setText(store.getString(PreferenceConstants.DOC_STORE_PROVIDER));
-		}
+		_selectedStore = store.getString(PreferenceConstants.DOC_STORE_PROVIDER);
 	}
 
 	@Override

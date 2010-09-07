@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.HashMap;
 
+import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.Platform;
 import org.tomale.id.Activator;
 
 /**
@@ -36,6 +38,8 @@ public class DatabaseConnectionManager {
 			ArrayList<DatabaseConnectionConfiguration> connections = Activator.getDatabaseConnections();
 			for(DatabaseConnectionConfiguration conf : connections){
 				if(conf.getName().equalsIgnoreCase(name)){
+					
+					IExtensionRegistry registry = Platform.getExtensionRegistry();
 					
 					
 					
