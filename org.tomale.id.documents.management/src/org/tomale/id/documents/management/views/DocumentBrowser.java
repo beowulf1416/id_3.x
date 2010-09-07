@@ -21,6 +21,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.part.ViewPart;
+import org.tomale.id.documents.management.Activator;
+import org.tomale.id.documents.management.db.IDocumentFilterType;
+import org.tomale.id.documents.management.db.IDocumentStore;
 
 /**
  * @author ftomale
@@ -28,6 +31,8 @@ import org.eclipse.ui.part.ViewPart;
  */
 public class DocumentBrowser extends ViewPart {
 
+	ArrayList<IDocumentFilterType> _docFilterTypes;
+	
 	TreeViewer _view;
 	
 	Composite _compFilters;
@@ -94,8 +99,25 @@ public class DocumentBrowser extends ViewPart {
 		tree.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
 	}
 	
+	private void initCboFilters(Combo cbo){
+		IDocumentStore store = Activator.getDocumentStore();
+		if(store == null){
+			getViewSite().getActionBars().getStatusLineManager().setErrorMessage("Unable to retrieve document filter types");
+		} else {
+			if(_docFilterTypes == null){
+				_docFilterTypes = store.getDocumentFilterTypes();
+			}
+			
+			for(IDocumentFilterType filterType : _docFilterTypes){
+				cbo.add(filterType.getName());
+				cbo.setData(filterType.getName(),filterType);
+			}
+		}
+	}
+	
 	private void addFilter(){
 		Combo cbo = new Combo(_compFilters, SWT.DROP_DOWN | SWT.READ_ONLY);
+		initCboFilters(cbo);
 		cbo.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,false));
 		_filterTypes.add(cbo);
 		

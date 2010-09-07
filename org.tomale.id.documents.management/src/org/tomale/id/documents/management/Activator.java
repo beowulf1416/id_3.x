@@ -1,12 +1,18 @@
 package org.tomale.id.documents.management;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.tomale.id.documents.management.db.IDocumentStore;
+import org.tomale.id.documents.management.preferences.PreferenceConstants;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -64,6 +70,33 @@ public class Activator extends AbstractUIPlugin {
 		}
 		
 		return ret;
+	}
+	
+	public static IDocumentStore getDocumentStore(){
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		String selectedStore = store.getString(PreferenceConstants.DOC_STORE_PROVIDER);
+		
+		IExtensionRegistry registry = Platform.getExtensionRegistry();
+		IConfigurationElement[] elements = registry.getConfigurationElementsFor(EXT_DOCUMENT_STORE_TYPES);
+		for(IConfigurationElement element : elements){
+			String name = element.getAttribute("name");
+			if(selectedStore.equals(name)){
+				try {
+					Object o = element.createExecutableExtension("class");
+					IDocumentStore docStore = (IDocumentStore) o;
+					return docStore;
+				}catch(CoreException e){
+					Activator.getDefault().getLog().log(new Status(Status.ERROR, 
+							Activator.PLUGIN_ID, MessageFormat.format("Unable to create an instance of class '{0}'", name)));
+				}
+				break;
+			}
+		}
+
+		Activator.getDefault().getLog().log(new Status(Status.ERROR, 
+				Activator.PLUGIN_ID, MessageFormat.format("Unable to create an instance of Document Store '{0}'.", selectedStore)));
+		
+		return null;
 	}
 
 }
