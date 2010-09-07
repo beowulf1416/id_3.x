@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="org.tomale.id.db.connection.providers" name="Database Connection Providers" schema="schema/org.tomale.id.db.connection.providers.exsd"/>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="org.tomale.id.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="RCP Perspective"
+            class="org.tomale.id.Perspective"
+            id="org.tomale.id.perspective">
+      </perspective>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.tomale.id.application"
+            name="Integrated Desktop">
+         <property
+               name="windowImages"
+               value="icons/alt_window_16.gif,icons/alt_window_32.gif">
+         </property>
+      </product>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu">
+         <menu
+               label="File"
+               mnemonic="F"
+               tooltip="File">
+            <command
+                  commandId="org.eclipse.ui.newWizard"
+                  label="New ..."
+                  mnemonic="N"
+                  style="push"
+                  tooltip="New ....">
+            </command>
+            <separator
+                  name="org.tomale.id.separator1"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="org.eclipse.ui.file.exit"
+                  label="Exit"
+                  mnemonic="x"
+                  style="push"
+                  tooltip="Exit id">
+            </command>
+         </menu>
+         <menu
+               label="Window"
+               mnemonic="W">
+            <command
+                  commandId="org.eclipse.ui.views.showView"
+                  label="Views ..."
+                  mnemonic="V"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.ui.window.preferences"
+                  label="Preferences ..."
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.tomale.id.editors.DatabaseConnectionEditor"
+            default="false"
+            icon="icons/alt_about.gif"
+            id="org.tomale.id.editors.databaseconnection"
+            name="Database Connection Editor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="org.tomale.id.category.database"
+            class="org.tomale.id.wizards.DatabaseConnectionWizard"
+            id="org.tomale.id.wizards.databaseconnection"
+            name="Database Connection">
+      </wizard>
+      <category
+            id="org.tomale.id.category.database"
+            name="Database">
+      </category>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="false"
+            category="org.tomale.id.category.views.database"
+            class="org.tomale.id.views.DatabaseConnectionsView"
+            id="org.tomale.id.views.databaseconnections"
+            name="Database Connections"
+            restorable="true">
+      </view>
+      <category
+            id="org.tomale.id.category.views.database"
+            name="Database">
+      </category>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.tomale.id.preferences.CompanyInfoPreferencePage"
+            id="org.tomale.id.preferences.companyinfo"
+            name="Company Information">
+      </page>
+      <page
+            class="org.tomale.id.preferences.DataProviderPreferencePage"
+            id="org.tomale.id.preferences.dataproviders"
+            name="Data Providers">
+      </page>
+   </extension>
+
+</plugin>
