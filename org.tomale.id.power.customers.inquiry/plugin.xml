@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="org.tomale.id.power.customers.inquiry.category.views"
+            name="Customers">
+      </category>
+      <view
+            allowMultiple="false"
+            category="org.tomale.id.power.customers.inquiry.category.views"
+            class="org.tomale.id.power.customers.inquiry.views.CustomersBrowser"
+            id="org.tomale.id.power.customers.inquiry.views.customersbrowser"
+            name="Customers Browser"
+            restorable="true">
+      </view>
+   </extension>
+
+</plugin>
