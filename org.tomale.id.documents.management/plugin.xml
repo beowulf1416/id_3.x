@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="org.tomale.id.documents.management.documentstores.providers" name="Document Store Provider" schema="schema/org.tomale.id.documents.management.documentstoreprovider.exsd"/>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="org.tomale.id.documents.management.category.views"
+            name="Documents">
+      </category>
+      <view
+            allowMultiple="false"
+            category="org.tomale.id.documents.management.category.views"
+            class="org.tomale.id.documents.management.views.DocumentBrowser"
+            id="org.tomale.id.documents.management.views.documentbrowser"
+            name="Document Browser"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.tomale.id.documents.management.preferences.DocumentManagementPreferencePage"
+            id="org.tomale.id.documents.management.preferences.documentmanagement"
+            name="Document Management">
+      </page>
+   </extension>
+
+</plugin>
