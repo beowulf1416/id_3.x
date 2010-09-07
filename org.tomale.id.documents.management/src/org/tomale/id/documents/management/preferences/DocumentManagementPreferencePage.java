@@ -26,7 +26,6 @@ import org.tomale.id.documents.management.DocumentStoreConfigurationElement;
 public class DocumentManagementPreferencePage extends PreferencePage implements
 		IWorkbenchPreferencePage {
 
-	String _selectedStore = "";
 	Combo _stores;
 	
 	/* (non-Javadoc)
@@ -58,8 +57,12 @@ public class DocumentManagementPreferencePage extends PreferencePage implements
 			_stores.add(element.getName());
 			_stores.setData(element.getName(), element);
 		}
-		if(!_selectedStore.isEmpty()){
-			_stores.setText(_selectedStore);
+		
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		String selectedStore = store.getString(PreferenceConstants.DOC_STORE_PROVIDER);
+		
+		if(!selectedStore.isEmpty()){
+			_stores.setText(selectedStore);
 		}
 	}
 
@@ -69,22 +72,21 @@ public class DocumentManagementPreferencePage extends PreferencePage implements
 	@Override
 	public void init(IWorkbench workbench) {
 
-		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		_selectedStore = store.getString(PreferenceConstants.DOC_STORE_PROVIDER);
 	}
 
 	@Override
-	protected void performApply() {
-		
+	public boolean performOk() {
+
 		savePreferences();
 		
-		super.performApply();
+		return super.performOk();
 	}
-	
+
 	private void savePreferences(){
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		if(!_stores.getText().isEmpty()){
-			store.setDefault(PreferenceConstants.DOC_STORE_PROVIDER, _stores.getText());
+			String id = ((DocumentStoreConfigurationElement) _stores.getData(_stores.getText())).getId();
+			store.setValue(PreferenceConstants.DOC_STORE_PROVIDER, id);
 		}
 	}
 

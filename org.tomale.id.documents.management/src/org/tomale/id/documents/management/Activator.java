@@ -79,15 +79,20 @@ public class Activator extends AbstractUIPlugin {
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 		IConfigurationElement[] elements = registry.getConfigurationElementsFor(EXT_DOCUMENT_STORE_TYPES);
 		for(IConfigurationElement element : elements){
-			String name = element.getAttribute("name");
-			if(selectedStore.equals(name)){
+			String id = element.getAttribute("id");
+			if(selectedStore.equals(id)){
 				try {
 					Object o = element.createExecutableExtension("class");
 					IDocumentStore docStore = (IDocumentStore) o;
 					return docStore;
 				}catch(CoreException e){
 					Activator.getDefault().getLog().log(new Status(Status.ERROR, 
-							Activator.PLUGIN_ID, MessageFormat.format("Unable to create an instance of class '{0}'", name)));
+							Activator.PLUGIN_ID, 
+							MessageFormat.format("Unable to create an instance of DocumentStore id '{0}'", id),e));
+				}catch(Exception e){
+					Activator.getDefault().getLog().log(new Status(Status.ERROR, 
+							Activator.PLUGIN_ID, 
+							MessageFormat.format("Unable to create an instance of DocumentStore id '{0}'", id),e));
 				}
 				break;
 			}

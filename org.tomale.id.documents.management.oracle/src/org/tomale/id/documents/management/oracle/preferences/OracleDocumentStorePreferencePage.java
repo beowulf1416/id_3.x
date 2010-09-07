@@ -27,7 +27,6 @@ import org.tomale.id.documents.management.oracle.Activator;
 public class OracleDocumentStorePreferencePage extends PreferencePage implements
 		IWorkbenchPreferencePage {
 
-	String _selectedConnection = "";
 	Combo _cns;
 	
 	/* (non-Javadoc)
@@ -58,8 +57,12 @@ public class OracleDocumentStorePreferencePage extends PreferencePage implements
 		for(DatabaseConnectionConfiguration cn : connections){
 			_cns.add(cn.getName());
 		}
-		if(!_selectedConnection.isEmpty()){
-			_cns.setText(_selectedConnection);
+		
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		String selectedConnection = store.getString(PreferenceConstants.DB_CONNECTION_NAME);
+
+		if(!selectedConnection.isEmpty()){
+			_cns.setText(selectedConnection);
 		}
 	}
 
@@ -68,18 +71,17 @@ public class OracleDocumentStorePreferencePage extends PreferencePage implements
 	 */
 	@Override
 	public void init(IWorkbench workbench) {
-		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		_selectedConnection = store.getString(PreferenceConstants.DB_CONNECTION_NAME);
+
 	}
 
 	@Override
-	protected void performApply() {
+	public boolean performOk() {
 		
 		savePreferences();
 		
-		super.performApply();
+		return super.performOk();
 	}
-	
+
 	private void savePreferences(){
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		if(!_cns.getText().isEmpty()){
