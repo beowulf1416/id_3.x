@@ -16,5 +16,13 @@
             restorable="true">
       </view>
    </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.tomale.id.power.customers.inquiry.preferences.CustomerInquiryPreferencePage"
+            id="org.tomale.id.power.customers.inquiry.preferences.customerinquiry"
+            name="Customer Inquiry">
+      </page>
+   </extension>
 
 </plugin>
