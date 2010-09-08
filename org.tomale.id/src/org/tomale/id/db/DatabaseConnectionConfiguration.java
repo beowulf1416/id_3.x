@@ -10,24 +10,26 @@ package org.tomale.id.db;
 public class DatabaseConnectionConfiguration {
 
 	String _name;
-	String _type;
+	String _factoryId;
 	String _host;
 	int _port;
 	String _dbname;
 	String _user;
 	String _pw;
+	String _options;
 	
-	public DatabaseConnectionConfiguration(final String name, final String type,
+	public DatabaseConnectionConfiguration(final String name, final String factoryId,
 			final String host, final int port, final String dbname, 
-			final String user, final String pw){
+			final String user, final String pw, final String options){
 		
 		_name = name;
-		_type = type;
+		_factoryId = factoryId;
 		_host = host;
 		_port = port;
 		_dbname = dbname;
 		_user = user;
 		_pw = pw;
+		_options = options;
 		
 	}
 
@@ -35,8 +37,8 @@ public class DatabaseConnectionConfiguration {
 		return _name;
 	}
 	
-	public String getTypeName(){
-		return _type;
+	public String getFactoryId(){
+		return _factoryId;
 	}
 	
 	public String getHost(){
@@ -57,6 +59,10 @@ public class DatabaseConnectionConfiguration {
 	
 	public String getPassword(){
 		return _pw;
+	}
+	
+	public String getOptions(){
+		return _options;
 	}
 	
 }

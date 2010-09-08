@@ -1,7 +1,9 @@
 package org.tomale.id;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
@@ -14,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.osgi.framework.BundleContext;
 import org.tomale.id.db.DatabaseConnectionConfiguration;
+import org.tomale.id.db.IConnectionFactory;
 import org.tomale.id.db.internal.DatabaseConnectionConfigurationElement;
 
 /**
@@ -87,6 +90,30 @@ public class Activator extends AbstractUIPlugin {
 		return ret;
 	}
 	
+	public static IConnectionFactory getConnectionFactory(final String id){
+		IExtensionRegistry registry = Platform.getExtensionRegistry();
+		IConfigurationElement[] elements = registry.getConfigurationElementsFor(EXT_DB_CONNECTION_PROVIDERS);
+		for(IConfigurationElement element : elements){
+			String elementId = element.getAttribute("id");
+			if(elementId.equals(id)){
+				try {
+					Object o = element.createExecutableExtension("class");
+					IConnectionFactory factory = (IConnectionFactory) o;
+					return factory;
+				}catch(CoreException e){
+					Activator.getDefault().getLog().log(new Status(Status.ERROR,
+							Activator.PLUGIN_ID,MessageFormat.format("Unable to create an instance of ConnectionFactory '{0}'", id)));
+					break;
+				}
+			}
+		}
+		
+		Activator.getDefault().getLog().log(new Status(Status.ERROR, 
+				Activator.PLUGIN_ID, MessageFormat.format("Unable to create ConnectionFactory '{0}'", id)));
+		
+		return null;
+	}
+	
 	public static ArrayList<DatabaseConnectionConfiguration> getDatabaseConnections(){
 		ArrayList<DatabaseConnectionConfiguration> ret = new ArrayList<DatabaseConnectionConfiguration>();
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
@@ -94,12 +121,13 @@ public class Activator extends AbstractUIPlugin {
 		try {
 				
 				String name = "";
-				String type = "";
+				String factoryId = "";
 				String host = "";
 				int port = 0;
 				String dbname = "";
 				String user = "";
 				String pw = "";
+				String opt;
 				
 				JSONArray jarray = new JSONArray();
 				if(!connections.isEmpty()){
@@ -109,15 +137,16 @@ public class Activator extends AbstractUIPlugin {
 						JSONObject o = jarray.getJSONObject(i);
 						
 						name = o.has("name") ? o.getString("name") : "";
-						type = o.has("type") ? o.getString("type") : "";
+						factoryId = o.has("factoryId") ? o.getString("factoryId") : "";
 						host = o.has("host") ? o.getString("host") : "";
 						port = o.has("port") ? o.getInt("port") : 0;
 						dbname = o.has("dbname") ? o.getString("dbname") : "";
 						user = o.has("user") ? o.getString("user") : "";
 						pw = o.has("pw") ? o.getString("pw") : "";
+						opt = o.has("options") ? o.getString("options") : "";
 						
-						ret.add(new DatabaseConnectionConfiguration(name, type, host, 
-								port, dbname, user, pw));
+						ret.add(new DatabaseConnectionConfiguration(name, factoryId, host, 
+								port, dbname, user, pw, opt));
 					}
 				}
 		} catch(JSONException e){
@@ -137,11 +166,12 @@ public class Activator extends AbstractUIPlugin {
 			for(DatabaseConnectionConfiguration c : confs){
 				JSONObject o = new JSONObject();
 				o.put("name", c.getName());
-				o.put("type", c.getTypeName());
+				o.put("factoryId", c.getFactoryId());
 				o.put("host", c.getHost());
 				o.put("port", c.getPort());
 				o.put("user", c.getUsername());
 				o.put("pw", c.getPassword());
+				o.put("options", c.getOptions());
 				
 				jarray.put(o);
 			}

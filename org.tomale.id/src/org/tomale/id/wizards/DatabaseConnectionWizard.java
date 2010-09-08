@@ -46,9 +46,10 @@ public class DatabaseConnectionWizard extends Wizard implements INewWizard {
 			String dbname = _page.getDatabaseName();
 			String user = _page.getUsername();
 			String pw = _page.getPassword();
+			String options = _page.getOptions();
 			
 			Activator.addDatabaseConnectionConfiguration(new DatabaseConnectionConfiguration(name, type, 
-					host, port, dbname, user, pw));
+					host, port, dbname, user, pw, options));
 			
 			return true;
 		}catch(Exception e){

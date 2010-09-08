@@ -37,6 +37,7 @@ public class DatabaseConnectionWizardPage extends WizardPage {
 	Text _dbname;
 	Text _user;
 	Text _pw;
+	Text _options;
 	
 	ModifyListener _modify = new ModifyListener() {
 		
@@ -152,6 +153,14 @@ public class DatabaseConnectionWizardPage extends WizardPage {
 		decoration = new ControlDecoration(_name, SWT.LEFT);
 		decoration.setDescriptionText("Please enter the name of the database password");
 		decoration.setImage(FieldDecorationRegistry.getDefault().getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION).getImage());
+
+		l = new Label(comp, SWT.NO_FOCUS);
+		l.setText("Options");
+		l.setLayoutData(new GridData(SWT.BEGINNING,SWT.CENTER,false,false));
+		
+		_options = new Text(comp, SWT.BORDER);
+		_options.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
+		_options.addModifyListener(_modify);
 		
 		setControl(comp);
 	}
@@ -203,6 +212,10 @@ public class DatabaseConnectionWizardPage extends WizardPage {
 	
 	public String getPassword(){
 		return _pw.getText();
+	}
+	
+	public String getOptions(){
+		return _options.getText();
 	}
 	
 }
