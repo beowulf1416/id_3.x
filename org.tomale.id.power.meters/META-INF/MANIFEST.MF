@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Meters
+Bundle-SymbolicName: org.tomale.id.power.meters;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.tomale.id.power.meters.Activator
+Bundle-Vendor: tomale.org
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.tomale.id;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
