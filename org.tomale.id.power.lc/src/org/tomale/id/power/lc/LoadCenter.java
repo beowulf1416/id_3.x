@@ -9,4 +9,12 @@ package org.tomale.id.power.lc;
  */
 public class LoadCenter {
 
+	int _lc;
+	
+	LoadCenterState _status;
+	
+	public LoadCenter(){
+		
+	}
+	
 }
