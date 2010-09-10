@@ -31,6 +31,8 @@ public class ConnectionFactory implements IConnectionFactory {
 			
 			OracleDataSource ds = new OracleDataSource();
 			
+			ds.setDriverType("thin");
+			ds.setServerName(host);
 			ds.setDatabaseName(name);
 			ds.setPortNumber(port);
 			ds.setUser(user);
