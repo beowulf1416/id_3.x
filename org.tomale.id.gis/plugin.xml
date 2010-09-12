@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="org.tomale.id.gis.views.category"
+            name="GIS">
+      </category>
+      <view
+            category="org.tomale.id.gis.views.category"
+            class="org.tomale.id.gis.views.LayersView"
+            id="org.tomale.id.gis.views.layers"
+            name="Layers"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.tomale.id.gis.wizards.category"
+            name="GIS">
+      </category>
+      <wizard
+            category="org.tomale.id.gis.wizards.category"
+            class="org.tomale.id.gis.wizards.NewLayerWizard"
+            id="org.tomale.id.gis.wizards.newlayer"
+            name="Layer">
+      </wizard>
+   </extension>
+
+</plugin>
