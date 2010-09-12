@@ -5,8 +5,6 @@ package org.tomale.id.wizards;
 
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.tomale.id.Activator;
@@ -22,15 +20,6 @@ public class DatabaseConnectionWizard extends Wizard implements INewWizard {
 	
 	boolean _canFinish = false;
 	DatabaseConnectionWizardPage _page;
-	
-	ModifyListener _modify = new ModifyListener() {
-		
-		@Override
-		public void modifyText(ModifyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-	};
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
