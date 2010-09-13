@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point id="org.tomale.id.gis.mapsourcefactories" name="Map Source Factories" schema="schema/org.tomale.id.gis.mapsourcefactories.exsd"/>
    <extension
          point="org.eclipse.ui.views">
       <category
