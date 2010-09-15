@@ -3,10 +3,19 @@
  */
 package org.tomale.id.gis.internal;
 
+import javax.media.opengl.GL;
 import javax.media.opengl.GLContext;
 import javax.media.opengl.GLDrawableFactory;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ControlEvent;
+import org.eclipse.swt.events.ControlListener;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.PaintEvent;
+import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.opengl.GLCanvas;
@@ -35,10 +44,105 @@ public class MapCanvas extends GLCanvas {
 	}
 	
 	private void init(){
+		this.setCurrent();
+		_context.makeCurrent();
 		
+		GL gl = _context.getGL();
+		gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		gl.glColor3f(0.0f, 0.0f, 0.0f);
+		gl.glEnable(GL.GL_DEPTH_TEST);
+		gl.glHint(GL.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
+		
+		_context.release();
 	}
 	
 	private void addEventListeners(){
+		addControlListener(new ControlListener() {
+			
+			@Override
+			public void controlResized(ControlEvent e) {
+				resize();
+			}
+			
+			@Override
+			public void controlMoved(ControlEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		addPaintListener(new PaintListener() {
+			
+			@Override
+			public void paintControl(PaintEvent e) {
+				paint();
+			}
+		});
+		
+		addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				switch(e.keyCode){
+					case SWT.ARROW_UP:{
+					
+						break;
+					}
+					case SWT.ARROW_DOWN:{
+						
+						break;
+					}
+					case SWT.ARROW_LEFT:{
+						
+						break;
+					}
+					case SWT.ARROW_RIGHT:{
+						
+						break;
+					}
+					case SWT.PAGE_UP:{
+						
+						break;
+					}
+					case SWT.PAGE_DOWN:{
+						
+						break;
+					}
+					case SWT.HOME:{
+						
+						break;
+					}
+				}
+			}
+		});
+		
+		addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseUp(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseDown(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 		// scrollbars
 		ScrollBar horizontal = getHorizontalBar();
 		horizontal.setEnabled(true);
