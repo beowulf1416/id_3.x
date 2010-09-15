@@ -157,8 +157,11 @@ public class DocumentBrowser extends ViewPart {
 	 */
 	@Override
 	public void setFocus() {
-		// TODO Auto-generated method stub
-
+		_view.getTree().setFocus();
+	}
+	
+	private void doFind(){
+		
 	}
 	
 	public class ViewContentProvider implements ITreeContentProvider {
