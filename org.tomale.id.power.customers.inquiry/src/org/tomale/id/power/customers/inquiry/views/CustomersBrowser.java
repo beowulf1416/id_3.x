@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -23,6 +25,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
@@ -171,10 +174,33 @@ public class CustomersBrowser extends ViewPart {
 				
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
-					// TODO Auto-generated method stub
+					
+					Display.getDefault().asyncExec(new Runnable() {
+						
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							
+						}
+					});
+					
 					return Status.OK_STATUS;
 				}
 			};
+			job.addJobChangeListener(new JobChangeAdapter(){
+
+				@Override
+				public void done(IJobChangeEvent event) {
+					IStatus status = event.getResult();
+					if(status.isOK()){
+						// TODO update table
+						
+					} else {
+						getViewSite().getActionBars().getStatusLineManager().setErrorMessage(status.getMessage());
+					}
+				}
+				
+			});
 			job.setPriority(Job.LONG);
 			job.schedule();
 			
