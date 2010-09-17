@@ -5,6 +5,10 @@ package org.tomale.id.power.customers.inquiry.views;
 
 import java.util.ArrayList;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -75,6 +79,14 @@ public class CustomersBrowser extends ViewPart {
 		_btnFind = new Button(compAdd,SWT.PUSH);
 		_btnFind.setText("Find");
 		_btnFind.setLayoutData(new GridData(SWT.RIGHT,SWT.FILL,false,false));
+		_btnFind.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				doFind();
+			}
+			
+		});
 		
 		_btnAdd = new Button(compAdd,SWT.PUSH);
 		_btnAdd.setText("+");
@@ -94,6 +106,8 @@ public class CustomersBrowser extends ViewPart {
 		Table tbl = _view.getTable();
 		initTableColumns(tbl);
 		tbl.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
+		
+		getSite().setSelectionProvider(_view);
 	}
 	
 	private void initTableColumns(Table table){
@@ -141,13 +155,44 @@ public class CustomersBrowser extends ViewPart {
 		_comp.layout();
 		_comp.getParent().layout();
 	}
+	
+	public void doFind(){
+		boolean find = false;
+		for(Text t : _txtFind){
+			if(!t.getText().isEmpty()){
+				find = true;
+			}
+		}
+		
+		if(find){
+			
+			// http://www.eclipse.org/articles/Article-Concurrency/jobs-api.html
+			Job job = new Job("// TODO replace with proper name") {
+				
+				@Override
+				protected IStatus run(IProgressMonitor monitor) {
+					// TODO Auto-generated method stub
+					return Status.OK_STATUS;
+				}
+			};
+			job.setPriority(Job.LONG);
+			job.schedule();
+			
+		} else {
+			getViewSite().getActionBars().getStatusLineManager().setErrorMessage("Please enter customer search criteria");
+		}
+	}
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.part.WorkbenchPart#setFocus()
 	 */
 	@Override
 	public void setFocus() {
-
+		if(_txtFind.size()>0){
+			_txtFind.get(0).setFocus();
+		} else {
+			_view.getTable().setFocus();
+		}
 	}
 	
 	public class ContentProvider implements IStructuredContentProvider {

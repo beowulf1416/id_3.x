@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point id="org.tomale.id.power.customers.inquiry.provider" name="Power Customer Data provider" schema="schema/org.tomale.id.power.customers.inquiry.provider.exsd"/>
    <extension
          point="org.eclipse.ui.views">
       <category
@@ -23,6 +24,31 @@
             id="org.tomale.id.power.customers.inquiry.preferences.customerinquiry"
             name="Customer Inquiry">
       </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.tomale.id.power.customers.inquiry.views.customersbrowser">
+         <command
+               commandId="org.tomale.id.power.customers.inquiry.commands.customerfind"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Find a customer"
+            id="org.tomale.id.power.customers.inquiry.commands.customerfind"
+            name="Find">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.tomale.id.power.customers.inquiry.handlers.CustomerFindHandler"
+            commandId="org.tomale.id.power.customers.inquiry.commands.customerfind">
+      </handler>
    </extension>
 
 </plugin>
