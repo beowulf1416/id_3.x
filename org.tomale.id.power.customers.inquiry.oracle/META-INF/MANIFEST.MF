@@ -8,6 +8,7 @@ Bundle-Vendor: tomale.org
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.tomale.id.power.customers;bundle-version="1.0.0",
- org.tomale.id.power.customers.inquiry;bundle-version="1.0.0"
+ org.tomale.id.power.customers.inquiry;bundle-version="1.0.0",
+ org.tomale.id;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

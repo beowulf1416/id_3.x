@@ -9,5 +9,14 @@
             name="Oracle Data Provider">
       </factory>
    </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.tomale.id.preferences.dataproviders"
+            class="org.tomale.id.power.customers.inquiry.oracle.preferences.OracleCustomerInquiryDataProviderPreferencePage"
+            id="org.tomale.id.power.customers.inquiry.oracle.preferences.dataprovider"
+            name="Oracle Power Customer Inquiry Data Provider">
+      </page>
+   </extension>
 
 </plugin>
