@@ -3,6 +3,8 @@
  */
 package org.tomale.id.gis;
 
+import java.util.ArrayList;
+
 /**
  * @author ferd
  *
@@ -18,5 +20,6 @@ public interface ILayer {
 	public boolean isEnabled();
 	
 	public void setEnabled(final boolean enabled);
-	
+
+	public ArrayList<IMapElement> getMapElements();
 }

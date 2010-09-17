@@ -3,9 +3,12 @@
  */
 package org.tomale.id.gis.internal;
 
+import java.util.ArrayList;
+
 import javax.media.opengl.GL;
 import javax.media.opengl.GLContext;
 import javax.media.opengl.GLDrawableFactory;
+import javax.media.opengl.glu.GLU;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ControlEvent;
@@ -18,10 +21,12 @@ import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.opengl.GLCanvas;
 import org.eclipse.swt.opengl.GLData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.ScrollBar;
+import org.tomale.id.gis.ILayer;
 
 /**
  * @author ferd
@@ -30,6 +35,16 @@ import org.eclipse.swt.widgets.ScrollBar;
 public class MapCanvas extends GLCanvas {
 
 	private final GLContext _context;
+	
+	ArrayList<ILayer> _layers = new ArrayList<ILayer>();
+	float _aspect = 0;
+	
+	int _rotate = 0;
+	
+	int _defaultRotate = 5;
+	int _defaultPanX = 5;
+	int _defaultPanY = 5;
+	int _defaultZoom = 5;
 	
 	public MapCanvas(Composite parent, int style, GLData data){
 		super(parent,style | SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.NO_BACKGROUND,
@@ -89,29 +104,48 @@ public class MapCanvas extends GLCanvas {
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
+				
+				boolean ctrl = (e.stateMask & SWT.CTRL) != 0;	// ctrl key pressed
+				
 				switch(e.keyCode){
 					case SWT.ARROW_UP:{
-					
+						if(ctrl){
+							rotate(_defaultRotate);
+						} else {
+							pan(0,_defaultPanY);
+						}
 						break;
 					}
 					case SWT.ARROW_DOWN:{
-						
+						if(ctrl){
+							rotate(-_defaultRotate);
+						} else {
+							pan(0,-_defaultPanY);
+						}
 						break;
 					}
 					case SWT.ARROW_LEFT:{
-						
+						if(ctrl){
+							rotate(_defaultRotate);
+						} else {
+							pan(_defaultPanX,0);
+						}
 						break;
 					}
 					case SWT.ARROW_RIGHT:{
-						
+						if(ctrl){
+							rotate(-_defaultRotate);
+						} else {
+							pan(-_defaultPanX,0);
+						}
 						break;
 					}
 					case SWT.PAGE_UP:{
-						
+						zoomIn(_defaultZoom);
 						break;
 					}
 					case SWT.PAGE_DOWN:{
-						
+						zoomOut(_defaultZoom);
 						break;
 					}
 					case SWT.HOME:{
@@ -181,10 +215,87 @@ public class MapCanvas extends GLCanvas {
 	}
 	
 	private void resize(){
+		Rectangle rect = getClientArea();
+		int width = rect.width;
+		int height = rect.height;
+		_aspect = width/height;
 		
+		this.setCurrent();
+		_context.makeCurrent();
+		GL gl = _context.getGL();
+		
+		// left, bottom, right, top
+		gl.glViewport(0,0, width, height);
+		gl.glMatrixMode(GL.GL_PROJECTION);
+		gl.glLoadIdentity();
+		
+		GLU glu = new GLU();
+		// field of view angle in degrees in the y direction
+		// aspect
+		// distance of near clipping plane
+		// distance of far clipping plane
+		glu.gluPerspective(45.0f, _aspect, 0.5f, 400.0f);
+		
+		gl.glMatrixMode(GL.GL_MODELVIEW);
+		gl.glLoadIdentity();
+		
+		_context.release();
 	}
 	
 	private void paint(){
 		
+		
+		
+		this.setCurrent();
+		_context.makeCurrent();
+		GL gl = _context.getGL();
+		
+		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+		gl.glLoadIdentity();
+		
+		_context.release();
+	}
+	
+	/**
+	 * rotate view by number of degrees
+	 * @param value
+	 */
+	private void rotate(int value){
+		_rotate += value;
+	}
+	
+	/**
+	 * pan view
+	 * @param dx
+	 * @param dy
+	 */
+	private void pan(int dx, int dy){
+		
+	}
+	
+	private void zoomIn(int value){
+		
+	}
+	
+	private void zoomOut(int value){
+		
+	}
+	
+	private void getMapElements(){
+		for(ILayer layer : _layers){
+			
+		}
+	}
+	
+	private void getRenderers(){
+		
+	}
+	
+	public ArrayList<ILayer> Layers(){
+		return _layers;
+	}
+	
+	public float getAspectRatio(){
+		return _aspect;
 	}
 }
