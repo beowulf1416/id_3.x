@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.tomale.id.power.customers.inquiry.provider">
+      <factory
+            class="org.tomale.id.power.customers.inquiry.oracle.DataFactory"
+            id="org.tomale.id.power.customers.inquiry.oracle.factory"
+            name="Oracle Data Provider">
+      </factory>
+   </extension>
+
+</plugin>
