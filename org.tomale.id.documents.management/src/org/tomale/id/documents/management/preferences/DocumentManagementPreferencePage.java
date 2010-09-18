@@ -62,7 +62,14 @@ public class DocumentManagementPreferencePage extends PreferencePage implements
 		String selectedStore = store.getString(PreferenceConstants.DOC_STORE_PROVIDER);
 		
 		if(!selectedStore.isEmpty()){
-			_stores.setText(selectedStore);
+			
+			for(DocumentStoreConfigurationElement element : elements){
+				if(selectedStore.equals(element.getId())){
+					_stores.setText(element.getName());
+					break;
+				}
+			}
+			
 		}
 	}
 
