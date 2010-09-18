@@ -27,6 +27,7 @@ import org.eclipse.swt.opengl.GLData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.ScrollBar;
 import org.tomale.id.gis.ILayer;
+import org.tomale.id.gis.IMapElement;
 
 /**
  * @author ferd
@@ -36,9 +37,12 @@ public class MapCanvas extends GLCanvas {
 
 	private final GLContext _context;
 	
+	MapView _view = new MapView();
+	
 	ArrayList<ILayer> _layers = new ArrayList<ILayer>();
 	float _aspect = 0;
 	
+	int _scale = 100;
 	int _rotate = 0;
 	
 	int _defaultRotate = 5;
@@ -220,6 +224,8 @@ public class MapCanvas extends GLCanvas {
 		int height = rect.height;
 		_aspect = width/height;
 		
+		_view.resize(width, height);
+		
 		this.setCurrent();
 		_context.makeCurrent();
 		GL gl = _context.getGL();
@@ -282,8 +288,9 @@ public class MapCanvas extends GLCanvas {
 	}
 	
 	private void getMapElements(){
+		Rectangle rect = _view.getBoundingRectangle();
 		for(ILayer layer : _layers){
-			
+			ArrayList<IMapElement> elements = layer.getMapElements(rect);
 		}
 	}
 	
