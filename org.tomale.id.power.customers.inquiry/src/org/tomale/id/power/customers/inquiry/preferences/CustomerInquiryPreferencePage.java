@@ -3,6 +3,9 @@
  */
 package org.tomale.id.power.customers.inquiry.preferences;
 
+import java.util.ArrayList;
+
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -13,6 +16,8 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
+import org.tomale.id.power.customers.inquiry.Activator;
+import org.tomale.id.power.customers.inquiry.DataProviderConfigurationElement;
 
 /**
  * @author ftomale
@@ -47,7 +52,24 @@ public class CustomerInquiryPreferencePage extends PreferencePage implements
 	}
 	
 	private void initProviders(){
+		ArrayList<DataProviderConfigurationElement> providers = Activator.getDataProviders();
+		for(DataProviderConfigurationElement element : providers){
+			_providers.add(element.getName());
+			_providers.setData(element.getName(),element);
+		}
 		
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		String selectedProvider = store.getString(PreferenceConstants.DATA_PROVIDER);
+		if(!selectedProvider.isEmpty()){
+			
+			for(DataProviderConfigurationElement element : providers){
+				if(selectedProvider.equals(element.getId())){
+					_providers.setText(element.getName());
+					break;
+				}
+			}
+			
+		}
 	}
 
 	/* (non-Javadoc)
@@ -57,6 +79,21 @@ public class CustomerInquiryPreferencePage extends PreferencePage implements
 	public void init(IWorkbench workbench) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public boolean performOk() {
+		
+		savePreferences();
+		
+		return super.performOk();
+	}
+
+	private void savePreferences(){
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		if(!_providers.getText().isEmpty()){
+			store.setValue(PreferenceConstants.DATA_PROVIDER, ((DataProviderConfigurationElement) _providers.getData(_providers.getText())).getId());
+		}
 	}
 
 }

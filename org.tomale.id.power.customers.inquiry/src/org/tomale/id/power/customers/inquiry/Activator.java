@@ -1,5 +1,10 @@
 package org.tomale.id.power.customers.inquiry;
 
+import java.util.ArrayList;
+
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -13,6 +18,8 @@ public class Activator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Activator plugin;
+
+	private static final String EXT_DATA_PROVIDER = "org.tomale.id.power.customers.inquiry.provider";
 	
 	/**
 	 * The constructor
@@ -45,6 +52,17 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public static Activator getDefault() {
 		return plugin;
+	}
+	
+	public static ArrayList<DataProviderConfigurationElement> getDataProviders(){
+		ArrayList<DataProviderConfigurationElement> providers = new ArrayList<DataProviderConfigurationElement>();
+		IExtensionRegistry registry = Platform.getExtensionRegistry();
+		IConfigurationElement[] elements = registry.getConfigurationElementsFor(EXT_DATA_PROVIDER);
+		for(IConfigurationElement element : elements){
+			providers.add(new DataProviderConfigurationElement(element.getAttribute("id"), 
+					element.getAttribute("name"), element.getAttribute("class")));
+		}
+		return providers;
 	}
 
 }
