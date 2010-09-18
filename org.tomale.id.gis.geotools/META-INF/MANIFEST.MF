@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Geotools
+Bundle-SymbolicName: org.tomale.id.gis.geotools;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.tomale.id.gis.geotools.Activator
+Bundle-Vendor: tomale.org
+Require-Bundle: org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
