@@ -34,6 +34,8 @@ public class LayersView extends ViewPart {
 		_view.setContentProvider(new ViewContentProvider());
 		_view.setLabelProvider(new ViewLabelProvider());
 		initTable();
+		
+		getSite().setSelectionProvider(_view);
 	}
 	
 	private void initTable(){
@@ -54,8 +56,6 @@ public class LayersView extends ViewPart {
 		col.setWidth(20);
 		col.setResizable(false);
 		col.setMoveable(false);
-		
-		
 	}
 
 	/* (non-Javadoc)

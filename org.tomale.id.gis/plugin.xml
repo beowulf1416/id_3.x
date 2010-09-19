@@ -28,6 +28,48 @@
             id="org.tomale.id.gis.wizards.newlayer"
             name="Layer">
       </wizard>
+      <wizard
+            category="org.tomale.id.gis.wizards.category"
+            class="org.tomale.id.gis.wizards.MapSourceWizard"
+            id="org.tomale.id.gis.wizards.mapsources.add"
+            name="Add Map Source">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.tomale.id.gis.views.layers">
+         <command
+               commandId="org.tomale.id.gis.commands.mapsources.add"
+               style="push">
+         </command>
+         <command
+               commandId="org.tomale.id.gis.commands.mapsources.remove"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="org.tomale.id.gis.commands.mapsources.add"
+            name="Add Map Source">
+      </command>
+      <command
+            id="org.tomale.id.gis.commands.mapsources.remove"
+            name="Remove Map Source">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.tomale.id.gis.handlers.AddMapSourceHandler"
+            commandId="org.tomale.id.gis.commands.mapsources.add">
+      </handler>
+      <handler
+            class="org.tomale.id.gis.handlers.RemoveMapSourceHandler"
+            commandId="org.tomale.id.gis.commands.mapsources.remove">
+      </handler>
    </extension>
 
 </plugin>
