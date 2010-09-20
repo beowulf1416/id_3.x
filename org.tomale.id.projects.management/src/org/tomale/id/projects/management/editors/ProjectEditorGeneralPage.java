@@ -3,6 +3,7 @@
  */
 package org.tomale.id.projects.management.editors;
 
+import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormPage;
 
 /**
@@ -16,6 +17,12 @@ public class ProjectEditorGeneralPage extends FormPage {
 	
 	public ProjectEditorGeneralPage(){
 		super(PAGE_ID, PAGE_TITLE);
+	}
+
+	@Override
+	protected void createFormContent(IManagedForm managedForm) {
+		// TODO Auto-generated method stub
+		super.createFormContent(managedForm);
 	}
 	
 }
