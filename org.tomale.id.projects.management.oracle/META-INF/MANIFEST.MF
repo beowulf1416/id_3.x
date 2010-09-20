@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Oracle Project Management Data Provider
+Bundle-SymbolicName: org.tomale.id.projects.management.oracle;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.tomale.id.projects.management.oracle.Activator
+Bundle-Vendor: tomale.org
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.tomale.id.db.oracle;bundle-version="1.0.0",
+ org.tomale.id.projects.management;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
