@@ -21,6 +21,7 @@ import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.opengl.GLCanvas;
 import org.eclipse.swt.opengl.GLData;
@@ -268,6 +269,10 @@ public class MapCanvas extends GLCanvas {
 	 */
 	private void rotate(int value){
 		_rotate += value;
+	}
+	
+	private void centerAt(final Point p){
+		_view.setCenterPoint(p);
 	}
 	
 	/**

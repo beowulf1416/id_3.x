@@ -7,10 +7,13 @@ import java.util.ArrayList;
 
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
+import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
@@ -81,7 +84,18 @@ public class MapSourceSelectionPage extends WizardPage {
 		decoration.setDescriptionText("Please select a map source provider");
 		decoration.setImage(FieldDecorationRegistry.getDefault().getFieldDecoration(FieldDecorationRegistry.DEC_REQUIRED).getImage());
 		_sources.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
-		_sources.addModifyListener(_modify);
+		_sources.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				// add page for configuration of 
+				// map source provider here
+				
+				updatePageComplete();
+			}
+			
+		});
 	}
 
 	private void initSources(){
@@ -99,5 +113,13 @@ public class MapSourceSelectionPage extends WizardPage {
 	
 	private void updatePageComplete(){
 		setPageComplete(isPageComplete());
+	}
+	
+	public String getName(){
+		return _name.getText();
+	}
+	
+	public MapSourceFactoryConfiguration getConfiguration(){
+		return (MapSourceFactoryConfiguration) _sources.getData(_sources.getText());
 	}
 }
