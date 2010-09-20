@@ -9,13 +9,10 @@ import java.util.ArrayList;
  * @author ftomale
  *
  */
-public class Project {
-	
+public class PredefinedProject {
+
 	int _id;
 	
-	String _title;
-	String _summary;
+	ArrayList<PredefinedTask> _tasks = new ArrayList<PredefinedTask>();
 	
-	ArrayList<Task> _tasks = new ArrayList<Task>();
-
 }
