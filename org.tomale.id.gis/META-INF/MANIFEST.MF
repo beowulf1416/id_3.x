@@ -13,3 +13,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/gluegen-rt.jar,
  lib/jogl.jar,
  .
+Export-Package: org.tomale.id.gis
