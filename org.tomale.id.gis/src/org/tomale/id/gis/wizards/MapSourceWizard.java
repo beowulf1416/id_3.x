@@ -17,6 +17,7 @@ import org.tomale.id.gis.preferences.MapSourceFactoryConfiguration;
 public class MapSourceWizard extends Wizard implements INewWizard {
 
 	MapSourceSelectionPage _page;
+	IWizardPage _mapSourceConfPage;
 	
 	@Override
 	public void addPages() {
@@ -55,6 +56,14 @@ public class MapSourceWizard extends Wizard implements INewWizard {
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void setMapSourceConfigPage(IWizardPage page){
+		if(_mapSourceConfPage != null){
+			_mapSourceConfPage = null;
+		}
+		_mapSourceConfPage = page;
+		addPage(_mapSourceConfPage);
 	}
 	
 }

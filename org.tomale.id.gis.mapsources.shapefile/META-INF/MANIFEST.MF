@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Shapefile map source
-Bundle-SymbolicName: org.tomale.id.gis.mapsources.shape
+Bundle-SymbolicName: org.tomale.id.gis.mapsources.shape;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.tomale.id.gis.mapsources.shapefile.Activator
 Bundle-Vendor: tomale.org

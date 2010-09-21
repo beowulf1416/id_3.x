@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.tomale.id.gis.mapsourcefactories">
+      <factory
+            class="org.tomale.id.gis.mapsources.shapefile.MapSourceFactory"
+            id="org.tomale.id.gis.mapsources.shapefile.factory"
+            name="Shapefile Map Source">
+      </factory>
+   </extension>
+
+</plugin>

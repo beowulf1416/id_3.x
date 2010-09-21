@@ -3,6 +3,8 @@
  */
 package org.tomale.id.gis;
 
+import org.eclipse.jface.wizard.WizardPage;
+
 /**
  * @author ferd
  *
@@ -10,5 +12,7 @@ package org.tomale.id.gis;
 public interface IMapSourceFactory {
 
 	public IMapSource create();
+	
+	public WizardPage getWizardPage();
 	
 }
