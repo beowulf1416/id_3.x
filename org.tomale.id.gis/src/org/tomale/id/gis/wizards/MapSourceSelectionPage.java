@@ -95,6 +95,8 @@ public class MapSourceSelectionPage extends WizardPage {
 			}
 			
 		});
+		
+		setControl(comp);
 	}
 
 	private void initSources(){
