@@ -7,10 +7,13 @@ import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.tomale.id.gis.Activator;
@@ -60,6 +63,25 @@ public class ShapefileWizardPage extends WizardPage {
 		_browse = new Button(comp, SWT.PUSH);
 		_browse.setText("...");
 		_browse.setLayoutData(new GridData(SWT.FILL,SWT.FILL,false,false));
+		_browse.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				chooseFile();
+			}
+			
+		});
+	}
+	
+	private void chooseFile(){
+		
+		FileDialog dlg = new FileDialog(getShell(),SWT.OPEN);
+		dlg.setFilterExtensions(new String[]{"*.prj","*.shp","*.dbf"});
+		dlg.setText("Please select a shape file");
+		String f = dlg.open();
+		
+		_file.setText(f);
+		
 	}
 
 }
