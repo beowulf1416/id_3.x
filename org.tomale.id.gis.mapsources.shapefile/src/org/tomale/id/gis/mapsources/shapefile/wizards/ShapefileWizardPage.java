@@ -71,6 +71,8 @@ public class ShapefileWizardPage extends WizardPage {
 			}
 			
 		});
+		
+		setControl(comp);
 	}
 	
 	private void chooseFile(){
