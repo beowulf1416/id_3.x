@@ -3,8 +3,10 @@
  */
 package org.tomale.id.gis.mapsources.shapefile.wizards;
 
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -17,12 +19,14 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.tomale.id.gis.Activator;
+import org.tomale.id.gis.IWizardPagePreference;
 
 /**
  * @author ftomale
  *
  */
-public class ShapefileWizardPage extends WizardPage {
+public class ShapefileWizardPage extends WizardPage 
+	implements IWizardPagePreference {
 
 	public static final String PAGE_TITLE = "New Shapefile Map Source";
 	public static final String PAGE_TEXT = "Shapefile Map Source";
@@ -98,6 +102,12 @@ public class ShapefileWizardPage extends WizardPage {
 	
 	private void updatePageComplete(){
 		setPageComplete(isPageComplete());
+	}
+
+	@Override
+	public void savePreference() {
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		
 	}
 
 }
