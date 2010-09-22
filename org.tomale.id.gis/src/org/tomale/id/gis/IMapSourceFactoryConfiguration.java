@@ -9,6 +9,10 @@ package org.tomale.id.gis;
  */
 public interface IMapSourceFactoryConfiguration {
 
+	int getId();
+	
+	String getName();
+	
 	String getJSON();
 	
 	void setJSON(final String json);
