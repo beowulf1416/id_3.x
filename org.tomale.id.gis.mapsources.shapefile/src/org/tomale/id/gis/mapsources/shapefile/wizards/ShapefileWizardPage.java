@@ -45,7 +45,7 @@ public class ShapefileWizardPage extends WizardPage {
 		Composite comp = new Composite(parent, SWT.NONE);
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 3;
-		comp.setLayoutData(comp);
+		comp.setLayout(layout);
 		
 		Label l;
 		ControlDecoration decoration;
@@ -84,6 +84,20 @@ public class ShapefileWizardPage extends WizardPage {
 		
 		_file.setText(f);
 		
+		updatePageComplete();
+		
+	}
+
+	@Override
+	public boolean isPageComplete() {
+		if(_file == null){
+			return false;
+		}
+		return !_file.getText().isEmpty();
+	}
+	
+	private void updatePageComplete(){
+		setPageComplete(isPageComplete());
 	}
 
 }
