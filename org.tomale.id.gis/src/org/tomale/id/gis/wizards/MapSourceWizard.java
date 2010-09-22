@@ -20,6 +20,12 @@ public class MapSourceWizard extends Wizard implements INewWizard {
 	IWizardPage _mapSourceConfPage;
 	
 	@Override
+	public boolean canFinish() {
+		return _mapSourceConfPage == null ? _page.isPageComplete() : 
+			_page.isPageComplete() & _mapSourceConfPage.isPageComplete();
+	}
+
+	@Override
 	public void addPages() {
 		
 		_page = new MapSourceSelectionPage();

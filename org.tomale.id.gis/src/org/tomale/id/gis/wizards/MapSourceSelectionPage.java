@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.tomale.id.gis.Activator;
+import org.tomale.id.gis.IMapSourceFactory;
 import org.tomale.id.gis.preferences.MapSourceFactoryConfiguration;
 
 /**
@@ -90,6 +91,11 @@ public class MapSourceSelectionPage extends WizardPage {
 				
 				// add page for configuration of 
 				// map source provider here
+				if(!_sources.getText().isEmpty()){
+					MapSourceFactoryConfiguration conf = (MapSourceFactoryConfiguration) _sources.getData(_sources.getText());
+					IMapSourceFactory factory = Activator.getMapSourceFactory(conf.getId());
+					((MapSourceWizard) getWizard()).setMapSourceConfigPage(factory.getWizardPage());
+				}
 				
 				updatePageComplete();
 			}
