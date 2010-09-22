@@ -3,6 +3,8 @@
  */
 package org.tomale.id.gis.mapsources.shapefile.wizards;
 
+import java.util.HashMap;
+
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
@@ -109,5 +111,16 @@ public class ShapefileWizardPage extends WizardPage
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		
 	}
+
+	@Override
+	public HashMap<String, Object> getOptions() {
+		HashMap<String, Object> options = new HashMap<String, Object>();
+		
+		options.put("file", _file.getText());
+		
+		return options;
+	}
+	
+	
 
 }
