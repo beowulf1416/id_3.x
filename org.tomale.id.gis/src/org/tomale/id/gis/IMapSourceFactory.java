@@ -15,4 +15,5 @@ public interface IMapSourceFactory {
 	
 	public WizardPage getWizardPage();
 	
+	public IMapSourceFactoryConfiguration getMapSourceConfiguration();
 }

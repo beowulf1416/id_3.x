@@ -8,6 +8,7 @@ import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
+import org.tomale.id.gis.IWizardPagePreference;
 import org.tomale.id.gis.preferences.MapSourceFactoryConfiguration;
 
 /**

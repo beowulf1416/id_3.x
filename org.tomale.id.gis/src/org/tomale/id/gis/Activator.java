@@ -97,4 +97,7 @@ public class Activator extends AbstractUIPlugin {
 		return null;
 	}
 	
+	public void addMapSourceFactory(final String id){
+		
+	}
 }
