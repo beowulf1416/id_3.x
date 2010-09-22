@@ -1,1 +1,7 @@
-this is a port of my integrated desktop application
+this is a port of my integrated desktop application to the eclipse platform
+contains plugins for 
+* customer inquiry for electric distribution customers
+* document management
+* inventory management
+* project management
+* gis
