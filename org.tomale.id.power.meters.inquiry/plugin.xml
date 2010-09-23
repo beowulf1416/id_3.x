@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="org.tomale.id.power.meters.inquiry.dataproviders" name="Meter Inquiry Data Providers" schema="schema/org.tomale.id.power.meters.inquiry.dataproviders.exsd"/>
+
+</plugin>
