@@ -71,7 +71,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java"/>
+                  <meta.attribute kind="java" basedOn=":org.tomale.id.power.meters.inquiry.IMeterInquiryDataFactory"/>
                </appinfo>
             </annotation>
          </attribute>
