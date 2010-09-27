@@ -16,10 +16,14 @@ public class Item {
 	ItemState _state;
 	
 	String _name;
+
+	ArrayList<Integer> _substituteIds = new ArrayList<Integer>();
+	ArrayList<Integer> _partIds = new ArrayList<Integer>();
 	
 	ArrayList<Integer> _classIds = new ArrayList<Integer>();
 	ArrayList<Integer> _storageLocationIds = new ArrayList<Integer>();
 	ArrayList<Integer> _manufacturerIds = new ArrayList<Integer>();
+	
 	
 	public String getName(){
 		return _name;
@@ -35,6 +39,24 @@ public class Item {
 	
 	public void setState(final ItemState state){
 		_state = state;
+	}
+	
+	public ArrayList<Integer> getSubstituteIds(){
+		return _substituteIds;
+	}
+	
+	public ArrayList<Item> getSubstitutes(){
+		// TODO
+		return null;
+	}
+	
+	public ArrayList<Integer> getPartIds(){
+		return _partIds;
+	}
+	
+	public ArrayList<Item> getParts(){
+		// TODO
+		return null;
 	}
 	
 	public ArrayList<Integer> getItemClassIds(){
