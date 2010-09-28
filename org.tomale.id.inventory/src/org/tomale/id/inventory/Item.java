@@ -24,7 +24,6 @@ public class Item {
 	ArrayList<Integer> _storageLocationIds = new ArrayList<Integer>();
 	ArrayList<Integer> _manufacturerIds = new ArrayList<Integer>();
 	
-	
 	public String getName(){
 		return _name;
 	}
