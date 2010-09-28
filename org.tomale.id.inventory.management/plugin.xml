@@ -16,5 +16,29 @@
             restorable="true">
       </view>
    </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.tomale.id.inventory.management.editors.ItemEditor"
+            default="false"
+            icon="icons/alt_window_16.gif"
+            id="org.tomale.id.inventory.management.editor.item"
+            name="Item Editor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.tomale.id.inventory.management.category.wizards"
+            name="Inventory">
+      </category>
+      <wizard
+            category="org.tomale.id.inventory.management.category.wizards"
+            class="org.tomale.id.inventory.management.wizards.ItemWizard"
+            icon="icons/alt_window_16.gif"
+            id="org.tomale.id.inventory.management.wizard.item"
+            name="Item">
+      </wizard>
+   </extension>
 
 </plugin>

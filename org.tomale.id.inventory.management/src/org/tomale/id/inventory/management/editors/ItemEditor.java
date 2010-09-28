@@ -15,6 +15,10 @@ import org.tomale.id.inventory.management.Activator;
  */
 public class ItemEditor extends FormEditor {
 
+	public final static String EDITOR_ID = "org.tomale.id.inventory.management.editor.item";
+	public final static String EDITOR_NAME = "Item Editor";
+	public final static String EDITOR_TIP = "Edit inventory items";
+	
 	ItemDetailsPage _details;
 	ItemSubstitutesPage _substitutes;
 	ItemPartsPage _parts;
