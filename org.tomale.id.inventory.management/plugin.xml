@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point id="org.tomale.id.inventory.management.providers" name="Inventory Data Provider Factory" schema="schema/org.tomale.id.inventory.management.providers.exsd"/>
    <extension
          point="org.eclipse.ui.views">
       <category
@@ -38,6 +39,13 @@
             icon="icons/alt_window_16.gif"
             id="org.tomale.id.inventory.management.wizard.item"
             name="Item">
+      </wizard>
+      <wizard
+            category="org.tomale.id.inventory.management.category.wizards"
+            class="org.tomale.id.inventory.management.wizards.ItemClassWizard"
+            icon="icons/alt_window_16.gif"
+            id="org.tomale.id.inventory.management.wizards.itemclass"
+            name="Item Class">
       </wizard>
    </extension>
 

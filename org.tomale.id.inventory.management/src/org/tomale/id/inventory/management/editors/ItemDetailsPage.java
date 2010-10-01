@@ -68,6 +68,5 @@ public class ItemDetailsPage extends FormPage {
 		_name.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false));
 		
 		section.setClient(comp);
-		
 	}
 }
